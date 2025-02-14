@@ -106,11 +106,13 @@ footer {
     width: 100%;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-bottom: 2rem;
 }
 
 /* Cambio colore al passaggio del mouse */
 #add-to-cart-btn:hover {
     background-color: #218838;
+
 }
 
 /* Padding extra per il bottone */
