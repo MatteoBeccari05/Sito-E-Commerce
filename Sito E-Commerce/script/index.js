@@ -181,6 +181,7 @@ async function loadData() {
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <a href="${offer.body.a.href}" class="${offer.body.a.class}">${offer.body.a.text}</a>
           <p class="price" style="margin-left: 20px; font-weight: bold;">${offer.body.price}</p>
+          
         </div>
       </div>
     `;
@@ -188,6 +189,8 @@ async function loadData() {
   });
 
   body.appendChild(offerDeck);
+
+  
 
   // Aggiungi footer
   const footer = document.createElement('footer');
