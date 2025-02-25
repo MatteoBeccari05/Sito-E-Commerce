@@ -1,128 +1,152 @@
 async function loadProductDetails() {
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id'); // Ottieni l'ID del prodotto dalla URL
+    const productIds = urlParams.get('id'); // Ottieni gli ID dei prodotti dalla URL
+    if (productIds) {
+        const idsArray = productIds.split(','); // Crea un array di ID separati da virgola
 
-    // Carica il file JSON con i dati dei prodotti
-    const response = await fetch('../json/prodotti.json');
-    const products = await response.json();
+        // Carica il file JSON con i dati dei prodotti
+        const response = await fetch('../json/prodotti.json');
+        const products = await response.json();
 
-    // Trova il prodotto corrispondente all'ID
-    const product = products.find(p => p.id == productId);
+        let productDetailsHTML = idsArray.map(id => {
+            // Trova il prodotto corrispondente all'ID
+            const product = products.find(p => p.id == id);
 
-    if (product) {
-        // Aggiungi i dettagli del prodotto alla pagina
-        const productDetailsHTML = `
-        <div class="row">
-            <div class="col-md-6">
-                <img id="product-image" src="${product.images[product.colors[0].toLowerCase()]}" alt="${product.name}" class="img-fluid rounded product-image">
+            if (product) {
+                return `
+                    <div class="row product" id="product-${product.id}" style="margin-bottom: 30px;"> <!-- Aggiungi margine tra i prodotti -->
+                        <div class="col-md-6">
+                            <img id="product-image-${product.id}" src="${product.images[product.colors[0].toLowerCase()]}" alt="${product.name}" class="img-fluid rounded product-image">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="product-title">${product.name}</h2>
+                            <p><strong>Processore:</strong> ${product.processor}</p>
+                            <p><strong>Display:</strong> ${product.display}</p>
+                            <p class="product-description"><strong>Descrizione:</strong> ${product.description}</p>
+                            
+                            <div class="form-group">
+                                <label for="color-select-${product.id}">Scegli il colore:</label>
+                                <select id="color-select-${product.id}" class="form-select color-select">
+                                    ${product.colors.map(color => `<option value="${color.toLowerCase()}">${color}</option>`).join('')}
+                                </select>
+                            </div>
+
+                            <br>
+                            <div class="form-group">
+                                <label for="storage-select-${product.id}">Scegli la capacità:</label>
+                                <select id="storage-select-${product.id}" class="form-select storage-select">
+                                    ${product.storageOptions.map(storage => `<option value="${storage}">${storage}</option>`).join('')}
+                                </select>
+                            </div>
+
+                            <div class="product-price-container">
+                                <p class="product-price" id="product-price-${product.id}">€${product.price}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="border-top: 1px solid #ccc; margin: 20px 0;"> <!-- Linea di separazione tra i prodotti -->
+                `;
+            } else {
+                return `<p>Prodotto con ID ${id} non trovato.</p>`;
+            }
+        }).join('');
+
+        productDetailsHTML += `
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="add-to-cart-btn" id="add-all-to-cart-btn">Aggiungi al carrello</button>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h2 class="product-title">${product.name}</h2>
-                <p><strong>Processore:</strong> ${product.processor}</p>
-                <p><strong>Display:</strong> ${product.display}</p>
-                <p class="product-description"><strong>Descrizione:</strong> ${product.description}</p>
-                
-                <div class="form-group">
-                    <label for="color-select">Scegli il colore:</label>
-                    <select id="color-select" class="form-select color-select">
-                        ${product.colors.map(color => `<option value="${color.toLowerCase()}">${color}</option>`).join('')}
-                    </select>
-                </div>
+        `;
+        
+        document.getElementById('product-details').innerHTML = productDetailsHTML;
 
-                <br>
-                <div class="form-group">
-                    <label for="storage-select">Scegli la capacità:</label>
-                    <select id="storage-select" class="form-select storage-select">
-                        ${product.storageOptions.map(storage => `<option value="${storage}">${storage}</option>`).join('')}
-                    </select>
-                </div>
-    
-                <div class="product-price-container">
-                    <p class="product-price" id="product-price">€${product.price}</p>
-                </div>
-    
-                <button class="btn btn-success mt-4" id="add-to-cart-btn">Aggiungi al carrello</button>
-            </div>
-        </div>
-    `;
-    
-    document.getElementById('product-details').innerHTML = productDetailsHTML;
+        // Aggiungi gli eventi per ogni prodotto
+        idsArray.forEach(id => {
+            const product = products.find(p => p.id == id);
+            if (product) {
+                // Cambia l'immagine del prodotto in base al colore selezionato
+                const colorSelect = document.getElementById(`color-select-${product.id}`);
+                colorSelect.addEventListener('change', (event) => {
+                    const selectedColor = event.target.value.toLowerCase();
+                    const selectedImage = product.images[selectedColor];
+                    if (selectedImage) {
+                        document.getElementById(`product-image-${product.id}`).src = selectedImage;
+                    }
+                });
 
-        // Aggiungere l'evento per cambiare l'immagine
-        const colorSelect = document.getElementById('color-select');
-        colorSelect.addEventListener('change', (event) => {
-            const selectedColor = event.target.value.toLowerCase(); // Ottieni il colore selezionato
-            const selectedImage = product.images[selectedColor];
-            if (selectedImage) {
-                document.getElementById('product-image').src = selectedImage;
+                // Cambia memoria e prezzo
+                const storageSelect = document.getElementById(`storage-select-${product.id}`);
+                storageSelect.addEventListener('change', (event) => {
+                    const selectedStorage = event.target.value;
+                    let updatedPrice = product.price;
+                    if (selectedStorage === "256GB") {
+                        updatedPrice = product.price + 100;
+                    } else if (selectedStorage === "512GB") {
+                        updatedPrice = product.price + 200;
+                    } else if (selectedStorage === "GPS + Cellular") {
+                        updatedPrice = product.price + 150;
+                    } else if (selectedStorage === "1TB") {
+                        updatedPrice = product.price + 300;
+                    } else if (selectedStorage === "2TB") {
+                        updatedPrice = product.price + 450;
+                    }
+                    document.getElementById(`product-price-${product.id}`).textContent = `€${updatedPrice}`;
+                });
             }
         });
 
-        // Aggiungere l'evento per cambiare la memoria e il prezzo
-        const storageSelect = document.getElementById('storage-select');
-        storageSelect.addEventListener('change', (event) => {
-            const selectedStorage = event.target.value;
-            let updatedPrice = product.price;
-            if (selectedStorage === "256GB") {
-                updatedPrice = product.price + 100;
-            } else if (selectedStorage === "512GB") {
-                updatedPrice = product.price + 200;
-            } else if (selectedStorage === "GPS + Cellular") {
-                updatedPrice = product.price + 150;
-            } else if (selectedStorage === "1TB") {
-                updatedPrice = product.price + 300;
-            } else if (selectedStorage === "2TB") {
-                updatedPrice = product.price + 450;
-            }
-            document.getElementById('product-price').textContent = `€${updatedPrice}`;
-        });
-
-        // Aggiungi l'evento per il tasto "Aggiungi al carrello"
-        const addToCartBtn = document.getElementById('add-to-cart-btn');
-        addToCartBtn.addEventListener('click', () => {
-            const selectedColor = colorSelect.value.toLowerCase();
-            const selectedStorage = storageSelect.value;
-            let updatedPrice = product.price;
-            
-            if (selectedStorage === "256GB") {
-                updatedPrice = product.price + 100;
-            } else if (selectedStorage === "512GB") {
-                updatedPrice = product.price + 200;
-            } else if (selectedStorage === "GPS + Cellular") {
-                updatedPrice = product.price + 150;
-            } else if (selectedStorage === "1TB") {
-                updatedPrice = product.price + 300;
-            } else if (selectedStorage === "2TB") {
-                updatedPrice = product.price + 450;
-            }
-
-            // Oggetto prodotto da aggiungere al carrello
-            const cartItem = {
-                id: product.id,
-                name: product.name,
-                image: product.images[selectedColor],
-                price: updatedPrice,
-                storage: selectedStorage,
-                color: selectedColor,
-                description: product.description
-            };
-
-            // Ottieni il carrello dal localStorage (se esiste), altrimenti creane uno nuovo
+        // Aggiungi l'evento per il tasto "Aggiungi tutti al carrello"
+        const addAllToCartBtn = document.getElementById('add-all-to-cart-btn');
+        addAllToCartBtn.addEventListener('click', () => {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            // Aggiungi il prodotto al carrello
-            cart.push(cartItem);
+            idsArray.forEach(id => {
+                const product = products.find(p => p.id == id);
+                if (product) {
+                    const colorSelect = document.getElementById(`color-select-${product.id}`);
+                    const storageSelect = document.getElementById(`storage-select-${product.id}`);
 
-            // Salva il carrello nel localStorage
+                    const selectedColor = colorSelect.value.toLowerCase();
+                    const selectedStorage = storageSelect.value;
+
+                    let updatedPrice = product.price;
+                    if (selectedStorage === "256GB") {
+                        updatedPrice = product.price + 100;
+                    } else if (selectedStorage === "512GB") {
+                        updatedPrice = product.price + 200;
+                    } else if (selectedStorage === "GPS + Cellular") {
+                        updatedPrice = product.price + 150;
+                    } else if (selectedStorage === "1TB") {
+                        updatedPrice = product.price + 300;
+                    } else if (selectedStorage === "2TB") {
+                        updatedPrice = product.price + 450;
+                    }
+
+                    const cartItem = {
+                        id: product.id,
+                        name: product.name,
+                        image: product.images[selectedColor],
+                        price: updatedPrice,
+                        storage: selectedStorage,
+                        color: selectedColor,
+                        description: product.description
+                    };
+
+                    cart.push(cartItem);
+                }
+            });
+
+            // Salva tutti i prodotti nel carrello
             localStorage.setItem('cart', JSON.stringify(cart));
 
-            alert('Prodotto aggiunto al carrello!');
+            alert('Tutti i prodotti sono stati aggiunti al carrello!');
         });
 
     } else {
-        document.getElementById('product-details').innerHTML = "<p>Prodotto non trovato.</p>";
+        document.getElementById('product-details').innerHTML = "<p>Nessun prodotto selezionato.</p>";
     }
 }
 
-// Carica i dettagli del prodotto quando la pagina viene caricata
+// Carica i dettagli dei prodotti quando la pagina viene caricata
 window.addEventListener('load', loadProductDetails);

@@ -96,7 +96,7 @@ footer {
 }
 
 /* Stili per il pulsante Aggiungi al carrello */
-#add-to-cart-btn {
+.add-to-cart-btn {
     background-color: #28a745;
     color: white;
     font-size: 1.25rem;

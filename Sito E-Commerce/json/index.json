@@ -176,13 +176,13 @@
           },
           "body": {
             "h5": "Bundle Mobile Standard",
-            "p": "iPhone 15 128GB <br> iPad 10 256GB <br> Apple Watch SE GPS",
+            "p": "iPhone 15 <br> iPad 10 <br> Apple Watch SE ",
             "a": {
-              "href": "prodotto.html?id=100",
+              "href": "prodotto.html?id=11,27,43",
               "class": "btn btn-primary",
               "text": "Scopri di più"
             },
-            "price": "€1699"
+            "price": "Da €1499"
           }
         },
         {
@@ -195,13 +195,13 @@
           },
           "body": {
             "h5": "Bundle Smart Pro",
-            "p": "iPhone 15 Pro 256GB <br> iPad Pro 12,9\" 256GB <br> MacBook Pro 14\" 1TB",
+            "p": "iPhone 16 Pro <br> iPad Pro 12,9\" <br> MacBook Pro 14\"",
             "a": {
-              "href": "prodotto.html?id=101",
+              "href": "prodotto.html?id=9,29,45",
               "class": "btn btn-primary",
               "text": "Scopri di più"
             },
-            "price": "€3649"
+            "price": "Da €4799"
           }
         }
       ]

@@ -99,7 +99,7 @@
         "display": "OLED da 6,1\"",
         "storageOptions": ["128GB", "256GB", "512GB"],
         "price": 1299,
-        "description": "L’iPhone 16 Pro rappresenta una nuova era per gli smartphone, combinando un design elegante e prestazioni di alto livello. Con il processore A18 Pro, è incredibilmente potente e veloce, capace di gestire facilmente multitasking e giochi ad alta intensità. Il display OLED da 6,1'' offre una qualità visiva straordinaria, con colori brillanti e dettagli nitidi, perfetto per guardare film, giocare o navigare. La fotocamera da 48 MP cattura immagini incredibili, anche in condizioni di scarsa illuminazione, mentre il teleobiettivo e la modalità Night Mode ti consentono di scattare foto professionali in ogni situazione. Con 512GB di memoria, hai ampio spazio per archiviare tutti i tuoi file e contenuti multimediali. Disponibile nelle varianti Nero e Bianco, l’iPhone 16 Pro è il dispositivo perfetto per chi cerca la massima qualità in un design compatto e potente."
+        "description": "L’iPhone 16 Pro rappresenta una nuova era per gli smartphone, combinando un design elegante e prestazioni di alto livello. Con il processore A18 Pro, è incredibilmente potente e veloce, capace di gestire facilmente multitasking e giochi ad alta intensità."
     },
     {
         "id": 10,
@@ -380,31 +380,5 @@
         "storageOptions": ["256GB", "512GB", "1TB"],
         "price": 1799,
         "description": "Galaxy Z Fold5 con processore Snapdragon 8 Gen 2, display Dynamic AMOLED 2X da 7,6\" e 256GB di memoria."
-    },
-    {
-        "id": 100,
-        "name": "Bundle Mobile Standard",
-        "images": {
-            "mobile standard": "../images/bundle1.png"
-        },
-        "colors": ["Mobile Standard"],
-        "processor": "A17 (iPhone) - Apple A14 (iPad) - Apple S8 (Watch SE)",
-        "display": "6.1\" OLED (iPhone) - 10.9\" Retina (iPad) - Retina (Watch SE)",
-        "storageOptions": ["Nessuna Opzione"],
-        "price": 1699,
-        "description": "Acquista prodotti in bundle per risparmiare fino al 25%. Prodotti in bundle: <br>iPhone 15 128GB <br> iPad 10 256GB <br> Apple Watch SE GPS "
-    },
-    {
-        "id": 101,
-        "name": "Bundle Smart Pro",
-        "images": {
-            "smart pro": "../images/bundle2.png"
-        },
-        "colors": ["Smart Pro"],
-        "processor": "A17 Pro (iPhone) - Apple M2 (iPad Pro) - Apple M3 Pro (MacBook Pro)",
-        "display": "6.1\" OLED (iPhone) - 12.9\" OLED (iPad Pro) - 14\" OLED (MacBook Pro)",
-        "storageOptions": ["Nessuna Opzione"],
-        "price": 3649,
-        "description": "Acquista prodotti in bundle per risparmiare fino al 25%. Prodotti in bundle: <br>iPhone 15 Pro 256GB <br> iPad Pro 12,9\" 256GB <br> MacBook Pro 14\" 1TB"
     }
 ]
