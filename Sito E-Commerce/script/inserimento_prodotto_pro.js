@@ -12,7 +12,8 @@ async function loadProductDetails() {
             // Trova il prodotto corrispondente all'ID
             const product = products.find(p => p.id == id);
 
-            if (product) {
+            if (product) 
+            {
                 return `
                     <div class="row product" id="product-${product.id}" style="margin-bottom: 30px;"> <!-- Aggiungi margine tra i prodotti -->
                         <div class="col-md-6">

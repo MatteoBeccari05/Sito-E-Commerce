@@ -97,9 +97,9 @@ async function loadData() {
             </div>
         `;
     });
-    formHTML += '</div>';  
+    formHTML += '</div> <br>';  
     
-    formHTML += `<button type="submit" class="btn btn-primary" id="pay-button">Paga</button></form>`;
+    formHTML += `<button type="submit" class="add-to-cart-btn" id="pay-button">Paga</button></form>`;
     formContainer.innerHTML = formHTML;
     
     
