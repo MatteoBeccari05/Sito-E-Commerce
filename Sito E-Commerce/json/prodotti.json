@@ -380,5 +380,32 @@
         "storageOptions": ["256GB", "512GB", "1TB"],
         "price": 1799,
         "description": "Galaxy Z Fold5 con processore Snapdragon 8 Gen 2, display Dynamic AMOLED 2X da 7,6\" e 256GB di memoria."
+    },
+    {
+        "id": 100,
+        "name": "Bundle Mobile Base",
+        "images": {
+            "mobile standard": "../images/bundle1.png"
+        },
+        "colors": ["Mobile Standard"],
+        "processor": "A16 (iPhone) - Apple A14 (iPad) - Apple S8 (Watch SE)",
+        "display": "6.1\" OLED (iPhone) - 10.9\" Retina (iPad) - Retina (Watch SE)",
+        "storageOptions": ["Nessuna Opzione"],
+        "price": 1299,
+        "description": "Acquista prodotti in bundle per risparmiare fino al 25%. Prodotti in bundle: <br>iPhone 14 128GB <br> iPad 10 64GB <br> Apple Watch SE GPS "
+    },
+    {
+        "id": 101,
+        "name": "Bundle Smart Regular",
+        "images": {
+            "smart pro": "../images/bundle2.png"
+        },
+        "colors": ["Smart Pro"],
+        "processor": "A16 (iPhone) - Apple M2 (iPad Air) - Apple M3 (MacBook Air)",
+        "display": "6.1\" OLED (iPhone) - 11\" OLED (iPad Air) - 13\" OLED (MacBook Air)",
+        "storageOptions": ["Nessuna Opzione"],
+        "price": 2649,
+        "description": "Acquista prodotti in bundle per risparmiare fino al 25%. Prodotti in bundle: <br>iPhone 15 128GB<br> iPad Air 256GB <br> MacBook Air 13.3\" 512GB"
     }
+
 ]

@@ -181,7 +181,6 @@ async function loadData() {
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <a href="${offer.body.a.href}" class="${offer.body.a.class}">${offer.body.a.text}</a>
           <p class="price" style="margin-left: 20px; font-weight: bold;">${offer.body.price}</p>
-          
         </div>
       </div>
     `;
@@ -191,6 +190,36 @@ async function loadData() {
   body.appendChild(offerDeck);
 
   
+ // Aggiungi la sezione per le offerte scontate (Bundle scontati)
+ const offersTitle2 = document.createElement('h2');
+ offersTitle2.textContent = jsonData.body.h2_discount || 'Bundle Scontati';  
+ body.appendChild(offersTitle2);
+ 
+ const offerDeck2 = document.createElement('div');
+ offerDeck2.className = 'card-deck';
+
+ // Loop attraverso gli items e crea le card per le offerte scontate
+ jsonData.body.discount_offers.items.forEach(offer => {
+   const offerElement = document.createElement('div');
+   offerElement.className = offer.class;
+   offerElement.style = offer.style;
+
+   offerElement.innerHTML = `
+     <img class="${offer.img.class}" src="${offer.img.src}" alt="${offer.img.alt}">
+     <div class="card-body">
+       <h5 class="card-title">${offer.body.h5}</h5>
+       <p class="card-text">${offer.body.p}</p>
+       <div style="display: flex; justify-content: space-between; align-items: center;">
+         <a href="${offer.body.a.href}" class="${offer.body.a.class}">${offer.body.a.text}</a>
+         <p class="price" style="margin-left: 20px; font-weight: bold;">${offer.body.price}</p>
+       </div>
+     </div>
+   `;
+   offerDeck2.appendChild(offerElement);
+ });
+
+ body.appendChild(offerDeck2);
+
 
   // Aggiungi footer
   const footer = document.createElement('footer');

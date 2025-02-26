@@ -163,7 +163,7 @@
         }
       ]
     },
-    "h2": "Bundle di questa settimana",
+    "h2": "Bundle di questa settimana con scelta",
     "offers": {
       "items": [
         {
@@ -202,6 +202,49 @@
               "text": "Scopri di più"
             },
             "price": "Da €4799"
+          }
+        }
+      ]
+    },
+    "h2_discount": "Bundle Scontati",
+    "discount_offers": {
+      "items": [
+        {
+          "class": "card",
+          "style": "width: 20rem;",
+          "img": {
+            "class": "card-img-top",
+            "src": "../images/bundle1.png",
+            "alt": "Card image cap"
+          },
+          "body": {
+            "h5": "Bundle Mobile Base",
+            "p": "iPhone 14 128GB <br> iPad 10 64GB <br> Apple Watch SE GPS",
+            "a": {
+              "href": "prodotto.html?id=100",
+              "class": "btn btn-primary",
+              "text": "Scopri di più"
+            },
+            "price": "€1299"
+          }
+        },
+        {
+          "class": "card",
+          "style": "width: 20rem;",
+          "img": {
+            "class": "card-img-top",
+            "src": "../images/bundle2.png",
+            "alt": "Card image cap"
+          },
+          "body": {
+            "h5": "Bundle Smart Regular",
+            "p": "iPhone 15 128GB<br> iPad Air 256GB <br> MacBook Air 13.3\" 512GB",
+            "a": {
+              "href": "prodotto.html?id=101",
+              "class": "btn btn-primary",
+              "text": "Scopri di più"
+            },
+            "price": "€2649"
           }
         }
       ]

@@ -147,6 +147,7 @@ function updateQuantity(productId, quantity) {
     displayCart();
 }
 
+
 function removeFromCart(productId) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const updatedCart = cart.filter(item => item.id !== productId);
@@ -162,6 +163,8 @@ function purchase() {
     // Passa alla pagina di pagamento
     window.location.href = "pagamento.html";
 }
+
+
 
 
 window.addEventListener('load', loadData);

@@ -123,17 +123,30 @@ async function loadProductDetails() {
                         updatedPrice = product.price + 450;
                     }
 
-                    const cartItem = {
-                        id: product.id,
-                        name: product.name,
-                        image: product.images[selectedColor],
-                        price: updatedPrice,
-                        storage: selectedStorage,
-                        color: selectedColor,
-                        description: product.description
-                    };
+                    // Controlla se il prodotto con lo stesso id, colore e capacità è già nel carrello
+                    const existingProductIndex = cart.findIndex(item => 
+                        item.id === product.id &&
+                        item.color === selectedColor &&
+                        item.storage === selectedStorage
+                    );
 
-                    cart.push(cartItem);
+                    if (existingProductIndex !== -1) {
+                        // Se il prodotto esiste, aggiorna la quantità
+                        cart[existingProductIndex].quantity += 1;
+                    } else {
+                        // Se il prodotto non esiste, aggiungilo con quantità 1
+                        const cartItem = {
+                            id: product.id,
+                            name: product.name,
+                            image: product.images[selectedColor],
+                            price: updatedPrice,
+                            storage: selectedStorage,
+                            color: selectedColor,
+                            description: product.description,
+                            quantity: 1 // Inizializza la quantità a 1
+                        };
+                        cart.push(cartItem);
+                    }
                 }
             });
 
